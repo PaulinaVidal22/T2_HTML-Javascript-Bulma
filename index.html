@@ -96,7 +96,7 @@
                     <div class="navbar-item has-dropdown is-hoverable">
                       <a class="navbar-link">Board</a>
               
-                    <div class="navbar-dropdown">
+                    <div class="navbar-dropdown" id = "dropdown-menu" role = "menu">
                         <a class="navbar-item">Option 1</a>
                         <hr class="navbar-divider">
                         <a class="navbar-item">Option 2</a>
@@ -107,7 +107,7 @@
                     <div class="navbar-item">
                       <div class="buttons">
                         <a class="button is-primary"> 
-                          <strong>Add Chore</strong>
+                          <strong>Add Task</strong>
                         </a>
                       </div>
                     </div>
@@ -179,5 +179,119 @@
         </div>
     </div>
 
+    <!-- Modal Structure -->
+<!-- <div id="addCardModal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <h2 class="title">Añadir Tarjeta</h2>
+      <div class="field">
+        <label class="label">Título</label>
+        <div class="control">
+          <input id="cardTitle" class="input" type="text" placeholder="Título de la tarjeta">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Descripción</label>
+        <div class="control">
+          <textarea id="cardDescription" class="textarea" placeholder="Descripción de la tarjeta"></textarea>
+        </div>
+      </div>
+      <button id="addCardButton" class="button is-primary">Añadir</button>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div> -->
+<!-- Modal Structure -->
+<div id="addCardModal" class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="box">
+      <h2 class="title">Añadir Tarjeta</h2>
+
+      <!-- Título de la tarjeta -->
+      <div class="field">
+        <label class="label">Título</label>
+        <div class="control">
+          <input id="cardTitle" class="input" type="text" placeholder="Título de la tarjeta">
+        </div>
+      </div>
+
+      <!-- Descripción de la tarjeta -->
+      <div class="field">
+        <label class="label">Descripción</label>
+        <div class="control">
+          <textarea id="cardDescription" class="textarea" placeholder="Descripción de la tarjeta"></textarea>
+        </div>
+      </div>
+
+      <!-- Fecha de vencimiento -->
+      <div class="field">
+        <label class="label">Fecha de Vencimiento</label>
+        <div class="control">
+          <input id="cardDueDate" class="input" type="date">
+        </div>
+      </div>
+
+      <!-- Estado -->
+      <div class="field">
+        <label class="label">Estado</label>
+        <div class="control">
+          <div class="select">
+            <select id="cardStatus">
+              <option value="Backlog">Backlog</option>
+              <option value="To do">To do</option>
+              <option value="In progress">In progress</option>
+              <option value="Blocked">Blocked</option>
+              <option value="Done">Done</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Responsable -->
+      <!-- <div class="field">
+        <label class="label">Responsable</label>
+        <div class="control">
+          <input id="cardResponsible" class="input" type="text" placeholder="Nombre del responsable">
+        </div>
+      </div> -->
+      <div class="field">
+        <label class="label">Responsable</label>
+        <div class="control">
+          <div class="select">
+            <select id="cardResponsible">
+              <option value="User 1">User 1</option>
+              <option value="User 2">User 2</option>
+              <option value="User 3">User 3</option>
+              <option value="User 4">User 4</option>
+              <option value="User 5">User 5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prioridad -->
+      <div class="field">
+        <label class="label">Prioridad</label>
+        <div class="control">
+          <div class="select">
+            <select id="cardPriority">
+              <option value="alta">Alta</option>
+              <option value="media">Media</option>
+              <option value="baja">Baja</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <button id="addCardButton" class="button is-primary">Añadir</button>
+    </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+    
+    <script src="script.js"></script>
 </body>
 </html>

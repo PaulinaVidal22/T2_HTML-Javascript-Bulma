@@ -5,18 +5,20 @@
 }
 
 .button.is-primary {
-    background-color: #007bff; /* Color azul */
-    border-color: #007bff; 
+    background-color: #175ec9; 
+    border-color: #175ec9; 
 }
+
 
 .button.is-primary:hover {
     background-color: #0056b3; /* Azul más oscuro para el hover */
     border-color: #0056b3; 
 }
 
-.panel {
+/* .panel {
     background-color: #0e71db;
-}
+} */
+
 .panel-heading {
     display: flex;
     justify-content: space-between;
@@ -42,7 +44,7 @@
 }
 
 .column-footer-item {
-    color : #0e71db;
+    color : #175ec9; 
 }
 
 .card {
@@ -51,17 +53,16 @@
     padding: 2px;
 }
 
-/* .card-header {
-    margin-bottom: 4px;
-} */
-
 .card-tag {
-    background-color: rgb(2, 101, 231);
+    background-color: #175ec9; 
     color: #6ca4db;
     border-radius: 10px; 
 }
 
-/* .card-content {
-    padding-top: 4px;
-} */
+/* Estilos básicos para el modal */
+.modal.is-active {
+    display: flex;
+}
+
+
 

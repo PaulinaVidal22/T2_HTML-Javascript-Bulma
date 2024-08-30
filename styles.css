@@ -1,0 +1,67 @@
+.navbar-item, .navbar-link {
+    font-size: 1rem; 
+    font-weight: 400; 
+    color: whitesmoke;
+}
+
+.button.is-primary {
+    background-color: #007bff; /* Color azul */
+    border-color: #007bff; 
+}
+
+.button.is-primary:hover {
+    background-color: #0056b3; /* Azul más oscuro para el hover */
+    border-color: #0056b3; 
+}
+
+.panel {
+    background-color: #0e71db;
+}
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+
+.columns{
+    display: flex;
+    flex-wrap: nowrap;
+    height: calc(100vh - 160px); /* Resta la altura del navbar y otros elementos */
+    margin-bottom: 1.5rem; 
+    column-gap: 0.75rem; /* Espacio entre columnas */
+    padding: 1rem;
+}
+
+.column {
+    flex: 1;
+    margin: 0 0.5rem; /* Margen interno entre columnas */
+    background-color: rgba(15, 61, 83, 0.267);
+    padding: 1rem; /* Espaciado interno en las columnas */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+.column-footer-item {
+    color : #0e71db;
+}
+
+.card {
+    background-color: #0056b3;
+    border-color: #0e71db;
+    padding: 2px;
+}
+
+/* .card-header {
+    margin-bottom: 4px;
+} */
+
+.card-tag {
+    background-color: rgb(2, 101, 231);
+    color: #6ca4db;
+    border-radius: 10px; 
+}
+
+/* .card-content {
+    padding-top: 4px;
+} */
+

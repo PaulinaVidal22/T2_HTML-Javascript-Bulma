@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"> 
+    <link rel="stylesheet" href="styles.css" />
+    <title>Document</title>
+</head>
+<body>
+  <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://trello.com/es"> 
+            <svg width="640" height="160" viewBox="0 0 640 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <image href="https://upload.wikimedia.org/wikipedia/en/thumb/8/8c/Trello_logo.svg/1200px-Trello_logo.svg.png" x="0" y="0" height="160" width="640"/>
+            </svg>
+          </a>
+      
+          <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <a class="navbar-item">
+              Workspaces
+            </a>
+      
+            <a class="navbar-item">
+              Recent
+            </a>
+
+            <a class="navbar-item">
+                Starred
+            </a>
+
+            <a class="navbar-item">
+                Templates
+            </a>
+      
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link">
+                More
+              </a>
+      
+              <div class="navbar-dropdown">
+                <a class="navbar-item">
+                  About
+                </a>
+                <!-- <a class="navbar-item is-selected">
+                  Jobs
+                </a> -->
+                <hr class="navbar-divider">
+                <a class="navbar-item">
+                  Report an issue
+                </a>
+              </div>
+            </div>
+
+            <a class="navbar-item is-active">
+              Create
+            </a>
+
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <a class="button is-primary">
+                  <strong>Sign up</strong>
+                </a>
+                <a class="button is-light">
+                  Log in
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <!-- Panel Section -->
+        <article class="panel is-link">
+            <div class="panel-heading">
+                <p>Marketing</p>
+                <div id="panelMenu" class="navbar-menu">
+                  <div class="navbar-start">
+                    <a class="navbar-item">
+                      Workspace visible
+                    </a>
+              
+                    <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">Board</a>
+              
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item">Option 1</a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item">Option 2</a>
+                    </div>
+                  </div>
+
+                  <!-- <div class="navbar-end">
+                    <div class="navbar-item">
+                      <div class="buttons">
+                        <a class="button is-primary"> 
+                          <strong>Add Chore</strong>
+                        </a>
+                      </div>
+                    </div>
+                  </div> -->
+
+                </div>
+            </div>
+        </article>
+
+    <!-- Columns Section -->
+    <div class="columns is-mobile">
+        <div class="column is-one-fifth">
+
+            <p class="bd-notification is-info">Backlog</p>
+
+            <div class="card">
+              <header class="card-header">
+                <a class="card-tag">important</a>
+                <!-- <button class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button> -->
+              </header>
+              <div class="card-content">
+                <div class="content">Idea</div>
+              </div>
+            </div>
+
+            <footer id = "backlog-column-footer" class="column-footer">
+              <a href="#" class="column-footer-item">+ Add a card</a>
+            </footer>
+        </div>
+
+        <div class="column is-one-fifth">
+            <p class="bd-notification is-info">To do</p>
+            <div class="card">
+              <div class="card-content">
+                <div class="content">Tarea pendiente</div>
+              </div>
+            </div>
+        </div>
+
+        <div class="column is-one-fifth">
+            <p class="bd-notification is-info">In progress</p>
+            <div class="card">
+              <div class="card-content">
+                <div class="content">Tarea en proceso</div>
+              </div>
+            </div>
+        </div>
+
+        <div class="column is-one-fifth">
+            <p class="bd-notification is-info">Blocked</p>
+            <div class="card">
+              <div class="card-content">
+                <div class="content">Tarea en espera</div>
+              </div>
+            </div>
+        </div>
+
+        <div class="column is-one-fifth">
+            <p class="bd-notification is-info">Done</p>
+            <div class="card">
+              <div class="card-content">
+                <div class="content">Tarea finalzada</div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

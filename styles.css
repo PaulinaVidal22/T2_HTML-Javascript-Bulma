@@ -37,29 +37,52 @@
 
 .column {
     flex: 1;
-    margin: 0 0.5rem; /* Margen interno entre columnas */
+    margin: 0.5rem; /* Margen interno entre columnas */
     background-color: rgba(15, 61, 83, 0.267);
     padding: 1rem; /* Espaciado interno en las columnas */
     border-radius: 10px; /* Bordes redondeados */
 }
 
+
 .column-footer-item {
     color : #175ec9; 
 }
 
+
 .card {
+    width: 100%; 
+    /* padding: 0.2rem; */
+    padding: 2px;
+    margin-bottom: 0.75rem; /* Espacio entre tarjetas */
     background-color: #0056b3;
     border-color: #0e71db;
-    padding: 2px;
+    border-radius: 8px; /* Bordes redondeados para mantener el estilo */
+    height: auto; 
 }
+
+.clickable-card {
+    cursor: pointer;
+}
+
+.clickable-card:hover {
+    background-color: #004080; /* Cambia el color de fondo al pasar el ratón sobre la tarjeta */
+}
+
 
 .card-tag {
     background-color: #175ec9; 
     color: #6ca4db;
-    border-radius: 10px; 
+    border-radius: 8px; 
+    font-size: 0.85rem; 
+    margin: 0%;
 }
 
-/* Estilos básicos para el modal */
+.card-title {
+    font-size: 0.9rem; 
+    font-weight: bold; 
+    margin: 0%; 
+}
+
 .modal.is-active {
     display: flex;
 }

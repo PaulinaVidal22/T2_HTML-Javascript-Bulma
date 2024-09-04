@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateCardButton = document.getElementById('updateCardButton');
     const deleteCardButton = document.getElementById('deleteCardButton');
     let currentColumn;
+    let selectedColumn;
     let currentCard;
 
     // Función para abrir el modal para añadir una tarjeta nueva
@@ -46,8 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
             
-
-            currentColumn.insertBefore(newCard, currentColumn.querySelector('.column-footer'));
+            selectedColumn = getColumnForStatus(cardStatus);
+            selectedColumn.insertBefore(newCard, selectedColumn.querySelector('.column-footer'));
 
             // Limpiar los campos y cerrar el modal
             document.getElementById('cardTitle').value = '';

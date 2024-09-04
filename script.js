@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalCloseButtons = document.querySelectorAll('.modal-close');
     const addCardButton = document.getElementById('addCardButton');
     const updateCardButton = document.getElementById('updateCardButton');
+    const deleteCardButton = document.getElementById('deleteCardButton');
     let currentColumn;
     let currentCard;
 
@@ -126,6 +127,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function deleteCard() {
+        if (currentCard){
+            const status = currentCard.getAttribute('data-status');
+            const column = getColumnForStatus(status);
+            column.removeChild(currentCard);
+        }
+
+        closeModals();
+    }
+
     // Event listeners
 
     // Abrir el modal para añadir una tarjeta nueva
@@ -154,6 +165,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Actualizar tarjeta
     updateCardButton.addEventListener('click', updateCard);
+
+    // Eliminar tarjeta
+    deleteCardButton.addEventListener('click', deleteCard);
 });
 
 

@@ -1,3 +1,5 @@
+const tasks = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     const addCardLinks = document.querySelectorAll('.column-footer-item');
     const addCardModal = document.getElementById('addCardModal');
@@ -24,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Función para añadir una tarjeta nueva
     function addCard() {
+
         const title = document.getElementById('cardTitle').value;
         const description = document.getElementById('cardDescription').value;
         const dueDate = document.getElementById('cardDueDate').value;
@@ -32,12 +35,41 @@ document.addEventListener('DOMContentLoaded', () => {
         const priority = document.getElementById('cardPriority').value;
 
         if (title && description && dueDate && responsible && priority) {
+            
+            // Agregar la tarea al array
+            let cardId;
+            do {
+                // Generar un ID único para la tarjeta
+                cardId = 'card-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+            } while (tasks.some(task => task.id === cardId));  // Verificar que el ID no esté ya en uso
+
+            const task = {
+                id: cardId,
+                title: title,
+                description: description,
+                dueDate: dueDate,
+                status: cardStatus,
+                responsible: responsible,
+                priority: priority
+            };
+
+            tasks.push(task);
+
+
+            // Agregar la tarea en el DOM
             const newCard = document.createElement('div');
+
             newCard.classList.add('card', 'clickable-card');
+            newCard.draggable = true;
+            newCard.id = cardId;
+
+            newCard.setAttribute('card-title', title);
             newCard.setAttribute('data-description', description);
             newCard.setAttribute('data-due-date', dueDate);
             newCard.setAttribute('data-status', cardStatus);
+            newCard.setAttribute('card-tag', priority);
             newCard.setAttribute('data-responsible', responsible);
+            
             newCard.innerHTML = `
                 <header class="card-header">
                     <a class="card-tag">${priority}</a>
@@ -100,7 +132,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const priority = document.getElementById('editCardPriority').value;
 
             if (title && description && dueDate && responsible && priority) {
-
+                
+                // Actualizar el elemento en el DOM
                 const oldStatus = currentCard.getAttribute('data-status');
                 const newStatus = cardStatus;
 
@@ -121,6 +154,19 @@ document.addEventListener('DOMContentLoaded', () => {
                     newColumn.insertBefore(currentCard, newColumn.querySelector('.column-footer'));
                 }
 
+                // Actualizar el elemento correspondiente en el array tasks
+                const cardId = currentCard.id;
+                const taskIndex = tasks.findIndex(task => task.id === cardId);
+
+                if (taskIndex !== -1) {
+                    tasks[taskIndex].title = title;
+                    tasks[taskIndex].description = description;
+                    tasks[taskIndex].dueDate = dueDate;
+                    tasks[taskIndex].status = newStatus;
+                    tasks[taskIndex].responsible = responsible;
+                    tasks[taskIndex].priority = priority;
+                }
+
                 closeModals();
             } else {
                 alert("Please fill in all fields.");
@@ -130,12 +176,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function deleteCard() {
         if (currentCard){
+
+            // Eliminar la tarjeta del DOM
             const status = currentCard.getAttribute('data-status');
             const column = getColumnForStatus(status);
             column.removeChild(currentCard);
-        }
 
-        closeModals();
+            // Eliminar la tarea en el array tasks
+            const cardId = currentCard.id;
+            
+            const taskIndex = tasks.findIndex(task => task.id === cardId);
+            if (taskIndex !== -1) {
+                tasks.splice(taskIndex, 1); 
+            }
+
+            // Limpiar la referencia de la tarjeta actual
+            currentCard = null;
+
+            closeModals();
+        }
+    }
+
+    function updateCardStatus(cardId, newStatus) {
+        const taskIndex = tasks.findIndex(task => task.id === cardId);
+    
+        if (taskIndex !== -1) {
+            // Actualizar el estado en el array tasks
+            tasks[taskIndex].status = newStatus;
+            
+            // Actualizar el estado en el DOM
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.setAttribute('data-status', newStatus);
+            }
+        }
     }
 
     // Event listeners
@@ -169,6 +243,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Eliminar tarjeta
     deleteCardButton.addEventListener('click', deleteCard);
+
+
+    // drag and drop
+    const cards = document.querySelectorAll('.card');
+    const columns = document.querySelectorAll('.column');
+
+    cards.forEach(card => {
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragend', handleDragEnd);
+    });
+
+    columns.forEach(column => {
+        column.addEventListener('dragover', handleDragOver);
+        column.addEventListener('drop', handleDrop);
+    });
+
+    function handleDragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => {
+            e.target.style.display = 'none';
+        }, 0);
+    }
+
+    function handleDragEnd(e) {
+        e.target.style.display = 'block';
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        const cardId = e.dataTransfer.getData('text/plain');
+        const card = document.getElementById(cardId);
+        const column = e.target.closest('.column');
+    
+        if (column && card) {
+            const columnFooter = column.querySelector('.column-footer');
+            column.insertBefore(card, columnFooter); 
+            
+            const newStatus = column.getAttribute('data-status');
+            updateCardStatus(cardId, newStatus);
+        }
+    }
+    
 });
 
 

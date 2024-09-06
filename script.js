@@ -1,6 +1,9 @@
 const tasks = [];
 
 document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.card');
+    const columns = document.querySelectorAll('.column');
+    
     const addCardLinks = document.querySelectorAll('.column-footer-item');
     const addCardModal = document.getElementById('addCardModal');
     const editCardModal = document.getElementById('editCardModal');
@@ -8,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const addCardButton = document.getElementById('addCardButton');
     const updateCardButton = document.getElementById('updateCardButton');
     const deleteCardButton = document.getElementById('deleteCardButton');
+
     let currentColumn;
     let selectedColumn;
     let currentCard;
@@ -24,7 +28,30 @@ document.addEventListener('DOMContentLoaded', () => {
         editCardModal.classList.remove('is-active');
     }
 
-    // Función para añadir una tarjeta nueva
+    function openEditCardModal(card) {
+        currentCard = card;
+        const title = card.querySelector('.card-title').textContent;
+        const priority = card.querySelector('.card-tag').textContent;
+        const description = card.getAttribute('data-description');
+        const dueDate = card.getAttribute('data-due-date');
+        const status = card.getAttribute('data-status');
+        const responsible = card.getAttribute('data-responsible');
+
+        document.getElementById('editCardTitle').value = title;
+        document.getElementById('editCardDescription').value = description;
+        document.getElementById('editCardDueDate').value = dueDate;
+        document.getElementById('editCardStatus').value = status;
+        document.getElementById('editCardResponsible').value = responsible;
+        document.getElementById('editCardPriority').value = priority;
+
+        editCardModal.classList.add('is-active');
+    }
+    
+
+    function getColumnForStatus(status) {
+        return document.querySelector(`.column[data-status="${status}"]`);
+    }
+
     function addCard() {
 
         const title = document.getElementById('cardTitle').value;
@@ -95,33 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Función para obtener la columna correspondiente al estado
-    function getColumnForStatus(status) {
-        return document.querySelector(`.column[data-status="${status}"]`);
-    }
-
-    // Función para abrir el modal de edición de tarjeta
-    function openEditCardModal(card) {
-        currentCard = card;
-        const title = card.querySelector('.card-title').textContent;
-        const priority = card.querySelector('.card-tag').textContent;
-        const description = card.getAttribute('data-description');
-        const dueDate = card.getAttribute('data-due-date');
-        const status = card.getAttribute('data-status');
-        const responsible = card.getAttribute('data-responsible');
-
-        document.getElementById('editCardTitle').value = title;
-        document.getElementById('editCardDescription').value = description;
-        document.getElementById('editCardDueDate').value = dueDate;
-        document.getElementById('editCardStatus').value = status;
-        document.getElementById('editCardResponsible').value = responsible;
-        document.getElementById('editCardPriority').value = priority;
-
-        editCardModal.classList.add('is-active');
-    }
-
-
-    // Función para actualizar la tarjeta editada
     function updateCard() {
         if (currentCard) {
             const title = document.getElementById('editCardTitle').value;
@@ -212,6 +212,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function handleDragStart(e) {
+        e.dataTransfer.setData('text/plain', e.target.id);
+        setTimeout(() => {
+            e.target.style.display = 'none';
+        }, 0);
+    }
+
+    function handleDragEnd(e) {
+        e.target.style.display = 'block';
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+    }
+
+    function handleDrop(e) {
+        e.preventDefault();
+        const cardId = e.dataTransfer.getData('text/plain');
+        const card = document.getElementById(cardId);
+        const column = e.target.closest('.column');
+    
+        if (column && card) {
+            const columnFooter = column.querySelector('.column-footer');
+            column.insertBefore(card, columnFooter); 
+            
+            const newStatus = column.getAttribute('data-status');
+            updateCardStatus(cardId, newStatus);
+        }
+    }
+
     // Event listeners
 
     // Abrir el modal para añadir una tarjeta nueva
@@ -246,9 +276,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // drag and drop
-    const cards = document.querySelectorAll('.card');
-    const columns = document.querySelectorAll('.column');
-
     cards.forEach(card => {
         card.addEventListener('dragstart', handleDragStart);
         card.addEventListener('dragend', handleDragEnd);
@@ -258,36 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
         column.addEventListener('dragover', handleDragOver);
         column.addEventListener('drop', handleDrop);
     });
-
-    function handleDragStart(e) {
-        e.dataTransfer.setData('text/plain', e.target.id);
-        setTimeout(() => {
-            e.target.style.display = 'none';
-        }, 0);
-    }
-
-    function handleDragEnd(e) {
-        e.target.style.display = 'block';
-    }
-
-    function handleDragOver(e) {
-        e.preventDefault();
-    }
-
-    function handleDrop(e) {
-        e.preventDefault();
-        const cardId = e.dataTransfer.getData('text/plain');
-        const card = document.getElementById(cardId);
-        const column = e.target.closest('.column');
-    
-        if (column && card) {
-            const columnFooter = column.querySelector('.column-footer');
-            column.insertBefore(card, columnFooter); 
-            
-            const newStatus = column.getAttribute('data-status');
-            updateCardStatus(cardId, newStatus);
-        }
-    }
     
 });
 
